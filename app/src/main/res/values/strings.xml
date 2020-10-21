@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">CheonghyunBusSchedule</string>
+
+    <string name="app_title">청현마을 버스 시간표</string>
+
+    <string name="bus_18">18번</string>
+    <string name="ch_to_gi">청현마을 -> 기흥구청</string>
+    <string name="ch_to_yo">청현마을 -> 영통홈플러스</string>
+    <string name="gi_to_ch">기흥구청 -> 청현마을</string>
+    <string name="yo_to_ch">영통홈플러스 -> 청현마을</string>
+
+    <string name="bus_56">56번</string>
+    <string name="ch_to_ju">청현마을 -> 죽전역</string>
+    <string name="ju_to_ch">죽전역 -> 청현마을</string>
+</resources>
