@@ -13,14 +13,24 @@
 
             <TextView
                 android:id="@+id/text_title"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_title"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginTop="@dimen/margin_normal"
                 android:layout_marginLeft="@dimen/margin_normal"
-                android:layout_marginRight="@dimen/margin_normal"
                 style="@style/TextBigTitle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/update_date"
+                android:textSize="@dimen/text_size_small"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginRight="@dimen/margin_normal"/>
 
             <LinearLayout
                 android:id="@+id/layout_bus_18"
@@ -44,7 +54,7 @@
                     style="@style/TextBigTitle"/>
 
                 <Button
-                    android:id="@+id/btn_ch_to_gi"
+                    android:id="@+id/btn_bus_18_ch_to_gi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/ch_to_gi"
@@ -59,22 +69,7 @@
                     style="?attr/materialButtonOutlinedStyle"/>
 
                 <Button
-                    android:id="@+id/btn_ch_to_yo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ch_to_yo"
-                    android:textColor="?attr/colorOnSurface"
-                    android:textSize="@dimen/text_size_title"
-                    android:minHeight="@dimen/button_minHeight"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:layout_marginTop="@dimen/margin_half"
-                    android:layout_marginLeft="@dimen/margin_half"
-                    android:layout_marginRight="@dimen/margin_half"
-                    style="?attr/materialButtonOutlinedStyle"/>
-
-                <Button
-                    android:id="@+id/btn_gi_to_ch"
+                    android:id="@+id/btn_bus_18_gi_to_ch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/gi_to_ch"
@@ -89,7 +84,22 @@
                     style="?attr/materialButtonOutlinedStyle"/>
 
                 <Button
-                    android:id="@+id/btn_yo_to_ch"
+                    android:id="@+id/btn_bus_18_ch_to_yo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ch_to_yo"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/text_size_title"
+                    android:minHeight="@dimen/button_minHeight"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:layout_marginTop="@dimen/margin_half"
+                    android:layout_marginLeft="@dimen/margin_half"
+                    android:layout_marginRight="@dimen/margin_half"
+                    style="?attr/materialButtonOutlinedStyle"/>
+
+                <Button
+                    android:id="@+id/btn_bus_18_yo_to_ch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/yo_to_ch"
@@ -128,7 +138,7 @@
                     style="@style/TextBigTitle"/>
 
                 <Button
-                    android:id="@+id/btn_ch_to_ju"
+                    android:id="@+id/btn_bus_56_ch_to_ju"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/ch_to_ju"
@@ -143,10 +153,178 @@
                     style="?attr/materialButtonOutlinedStyle"/>
 
                 <Button
-                    android:id="@+id/btn_ju_to_ch"
+                    android:id="@+id/btn_bus_56_ju_to_ch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/ju_to_ch"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/text_size_title"
+                    android:minHeight="@dimen/button_minHeight"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:layout_marginTop="@dimen/margin_half"
+                    android:layout_marginLeft="@dimen/margin_half"
+                    android:layout_marginRight="@dimen/margin_half"
+                    android:layout_marginBottom="@dimen/margin_half"
+                    style="?attr/materialButtonOutlinedStyle"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_bus_28_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/background_rounding_shape"
+                app:layout_constraintTop_toBottomOf="@id/layout_bus_56"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:layout_marginRight="@dimen/margin_normal">
+
+                <TextView
+                    android:id="@+id/text_bus_28_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bus_28_1"
+                    android:layout_marginTop="@dimen/margin_half"
+                    android:layout_marginLeft="@dimen/margin_half"
+                    android:layout_marginRight="@dimen/margin_half"
+                    style="@style/TextBigTitle"/>
+
+                <Button
+                    android:id="@+id/btn_bus_28_1_ch_to_gi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ch_to_gi"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/text_size_title"
+                    android:minHeight="@dimen/button_minHeight"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:layout_marginTop="@dimen/margin_half"
+                    android:layout_marginLeft="@dimen/margin_half"
+                    android:layout_marginRight="@dimen/margin_half"
+                    style="?attr/materialButtonOutlinedStyle"/>
+
+                <Button
+                    android:id="@+id/btn_bus_28_1_gi_to_ch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gi_to_ch"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/text_size_title"
+                    android:minHeight="@dimen/button_minHeight"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:layout_marginTop="@dimen/margin_half"
+                    android:layout_marginLeft="@dimen/margin_half"
+                    android:layout_marginRight="@dimen/margin_half"
+                    style="?attr/materialButtonOutlinedStyle"/>
+
+                <Button
+                    android:id="@+id/btn_bus_28_1_ch_to_he"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ch_to_he"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/text_size_title"
+                    android:minHeight="@dimen/button_minHeight"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:layout_marginTop="@dimen/margin_half"
+                    android:layout_marginLeft="@dimen/margin_half"
+                    android:layout_marginRight="@dimen/margin_half"
+                    style="?attr/materialButtonOutlinedStyle"/>
+
+                <Button
+                    android:id="@+id/btn_bus_28_1_he_to_ch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/he_to_ch"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/text_size_title"
+                    android:minHeight="@dimen/button_minHeight"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:layout_marginTop="@dimen/margin_half"
+                    android:layout_marginLeft="@dimen/margin_half"
+                    android:layout_marginRight="@dimen/margin_half"
+                    android:layout_marginBottom="@dimen/margin_half"
+                    style="?attr/materialButtonOutlinedStyle"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_bus_28_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/background_rounding_shape"
+                app:layout_constraintTop_toBottomOf="@id/layout_bus_28_1"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:layout_marginRight="@dimen/margin_normal">
+
+                <TextView
+                    android:id="@+id/text_bus_28_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bus_28_3"
+                    android:layout_marginTop="@dimen/margin_half"
+                    android:layout_marginLeft="@dimen/margin_half"
+                    android:layout_marginRight="@dimen/margin_half"
+                    style="@style/TextBigTitle"/>
+
+                <Button
+                    android:id="@+id/btn_bus_28_3_ch_to_se"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ch_to_se"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/text_size_title"
+                    android:minHeight="@dimen/button_minHeight"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:layout_marginTop="@dimen/margin_half"
+                    android:layout_marginLeft="@dimen/margin_half"
+                    android:layout_marginRight="@dimen/margin_half"
+                    style="?attr/materialButtonOutlinedStyle"/>
+
+                <Button
+                    android:id="@+id/btn_bus_28_3_se_to_ch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/se_to_ch"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/text_size_title"
+                    android:minHeight="@dimen/button_minHeight"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:layout_marginTop="@dimen/margin_half"
+                    android:layout_marginLeft="@dimen/margin_half"
+                    android:layout_marginRight="@dimen/margin_half"
+                    style="?attr/materialButtonOutlinedStyle"/>
+
+                <Button
+                    android:id="@+id/btn_bus_28_3_ch_to_he"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ch_to_he"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/text_size_title"
+                    android:minHeight="@dimen/button_minHeight"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:layout_marginTop="@dimen/margin_half"
+                    android:layout_marginLeft="@dimen/margin_half"
+                    android:layout_marginRight="@dimen/margin_half"
+                    style="?attr/materialButtonOutlinedStyle"/>
+
+                <Button
+                    android:id="@+id/btn_bus_28_3_he_to_ch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/he_to_ch"
                     android:textColor="?attr/colorOnSurface"
                     android:textSize="@dimen/text_size_title"
                     android:minHeight="@dimen/button_minHeight"

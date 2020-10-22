@@ -2,12 +2,35 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/fragment_main">
+    app:startDestination="@id/fragment_home">
 
     <fragment
-        android:id="@+id/fragment_main"
+        android:id="@+id/fragment_home"
         android:name="com.mjjang.cheonghyunbusschedule.ui.HomeFragment"
         tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_fragment_main_to_fragment_schedule"
+            app:destination="@id/fragment_schedule"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_schedule"
+        android:name="com.mjjang.cheonghyunbusschedule.ui.ScheduleFragment"
+        tools:layout="@layout/fragment_schedule">
+
+        <argument
+            android:name="bus"
+            app:argType="string" />
+
+        <argument
+            android:name="from"
+            app:argType="string" />
+
+        <argument
+            android:name="to"
+            app:argType="string" />
 
     </fragment>
 

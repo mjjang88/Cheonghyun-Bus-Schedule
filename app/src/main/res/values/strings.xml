@@ -3,13 +3,25 @@
 
     <string name="app_title">청현마을 버스 시간표</string>
 
+    <string name="update_date">20.10.22기준</string>
+
+    <string name="schedule">시간표</string>
+
     <string name="bus_18">18번</string>
     <string name="ch_to_gi">청현마을 -> 기흥구청</string>
-    <string name="ch_to_yo">청현마을 -> 영통홈플러스</string>
     <string name="gi_to_ch">기흥구청 -> 청현마을</string>
+    <string name="ch_to_yo">청현마을 -> 영통홈플러스</string>
     <string name="yo_to_ch">영통홈플러스 -> 청현마을</string>
 
     <string name="bus_56">56번</string>
     <string name="ch_to_ju">청현마을 -> 죽전역</string>
     <string name="ju_to_ch">죽전역 -> 청현마을</string>
+
+    <string name="bus_28_1">28-1번</string>
+    <string name="ch_to_he">청현마을 -> 흥덕E마트</string>
+    <string name="he_to_ch">흥덕E마트 -> 청현마을</string>
+    
+    <string name="bus_28_3">28-3번</string>
+    <string name="ch_to_se">청현마을 -> 서천고교</string>
+    <string name="se_to_ch">서천고교 -> 청현마을</string>
 </resources>
