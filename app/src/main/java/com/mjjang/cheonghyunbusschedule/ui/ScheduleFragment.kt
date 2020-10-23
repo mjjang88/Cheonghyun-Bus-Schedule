@@ -5,13 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.navArgs
+import com.mjjang.cheonghyunbusschedule.adapter.ScheduleAdapter
 import com.mjjang.cheonghyunbusschedule.data.BusSchedule
 import com.mjjang.cheonghyunbusschedule.databinding.FragmentScheduleBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ScheduleFragment : Fragment() {
 
     private val args: ScheduleFragmentArgs by navArgs()
+
+    val schedule: MutableLiveData<List<String>> = MutableLiveData()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,9 +26,39 @@ class ScheduleFragment : Fragment() {
     ): View? {
         val binding = FragmentScheduleBinding.inflate(inflater, container, false)
 
+        val adapter = ScheduleAdapter()
+        binding.recyclerSchedule.adapter = adapter
+        schedule.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
 
+        // 버스, 노선, 시간에 알맞은 시간표를 가져와서 adapter에 씀
+        setScheduleData(args.bus, args.from, args.to, getCurrentTime(), Calendar.getInstance().get(Calendar.DAY_OF_WEEK))
 
         return binding.root
+    }
+
+    private fun setScheduleData(bus: String, from: String, to: String, time: String, dayOfWeek: Int) {
+        var busSchedule = getBusSchedule(bus, from, to, isWeekDay(dayOfWeek))
+
+        // 28-1번은 일요일, 공휴일에는 운행하지 않음
+        // 공휴일 정보를 가져오려면 처리가 필요한데... 일단은 텍스트로 표출해놓자..
+        if (bus == "28-1" && dayOfWeek == Calendar.SUNDAY) {
+            busSchedule = emptyArray()
+        }
+
+        schedule.value = busSchedule.toList()
+    }
+
+    private fun getCurrentTime(): String {
+        val calendar = Calendar.getInstance()
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+        val min = calendar.get(Calendar.MINUTE)
+        return "$hour:$min"
+    }
+
+    private fun isWeekDay(dayOfWeek: Int): Boolean {
+        return !(dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY)
     }
 
     private fun getFromToFullString(strStation: String): String {
