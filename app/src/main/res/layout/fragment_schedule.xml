@@ -54,8 +54,8 @@
             android:text="@string/change_time"
             android:textColor="?attr/colorOnSurface"
             app:layout_constraintTop_toTopOf="@id/text_time"
-            app:layout_constraintLeft_toRightOf="@id/text_time_tail"
-            android:layout_marginLeft="@dimen/margin_double"/>
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginRight="@dimen/margin_normal"/>
 
         <TextView
             android:id="@+id/text_arrive"
@@ -78,6 +78,7 @@
             app:layout_constraintTop_toBottomOf="@id/text_time"
             app:layout_constraintLeft_toRightOf="@id/text_arrive"
             android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginLeft="@dimen/margin_normal"
             style="@style/TextBigTitle"/>
 
         <View
@@ -92,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/schedule"
-            app:layout_constraintTop_toBottomOf="@id/text_arrive"
+            app:layout_constraintTop_toBottomOf="@id/text_arrive_tail"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="@dimen/margin_double"

@@ -60,12 +60,14 @@ class ScheduleFragment : Fragment() {
             val date = simpleDataFormat.parse(binding.textTime.text.toString())
             Calendar.getInstance().time = date
             TimePickerDialog(
-                requireContext(), { p0, p1, p2 ->
+                requireContext(),
+                android.R.style.Theme_Holo_Light_Dialog,
+                { p0, p1, p2 ->
                     mTime.value = "$p1:$p2"
                 },
                 Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
                 Calendar.getInstance().get(Calendar.MINUTE),
-                true
+                false
             ).show()
         }
 
@@ -100,7 +102,7 @@ class ScheduleFragment : Fragment() {
         } else {
             binding.textArrive.text = abs(timeGap).toString() + "분"
             binding.textArrive.visibility = View.VISIBLE
-            binding.textArriveTail.text = " 후 도착합니다"
+            binding.textArriveTail.text = "후 도착합니다"
         }
     }
 
