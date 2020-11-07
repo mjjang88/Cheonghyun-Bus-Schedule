@@ -1,5 +1,6 @@
 package com.mjjang.cheonghyunbusschedule.ui
 
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,21 +11,31 @@ import androidx.navigation.fragment.navArgs
 import com.mjjang.cheonghyunbusschedule.adapter.ScheduleAdapter
 import com.mjjang.cheonghyunbusschedule.data.BusSchedule
 import com.mjjang.cheonghyunbusschedule.databinding.FragmentScheduleBinding
+import com.mjjang.cheonghyunbusschedule.util.TimeUtil
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.abs
 
 class ScheduleFragment : Fragment() {
+
+    private val LAST_BUS_IS_OVER = 99999
 
     private val args: ScheduleFragmentArgs by navArgs()
 
     val schedule: MutableLiveData<List<String>> = MutableLiveData()
+
+    val mTime: MutableLiveData<String> = MutableLiveData()
+
+    lateinit var binding: FragmentScheduleBinding
+
+    private lateinit var busSchedule: Array<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentScheduleBinding.inflate(inflater, container, false)
+        binding = FragmentScheduleBinding.inflate(inflater, container, false)
 
         val adapter = ScheduleAdapter()
         binding.recyclerSchedule.adapter = adapter
@@ -32,14 +43,43 @@ class ScheduleFragment : Fragment() {
             adapter.submitList(it)
         }
 
+        mTime.observe(viewLifecycleOwner) {
+            binding.textTime.text = it
+            val timeGap = calcArriveTime(busSchedule, it)
+            setArriveTime(timeGap)
+            val adapter = binding.recyclerSchedule.adapter
+            if (adapter is ScheduleAdapter) {
+                val selectPosition = adapter.getSelectPosition(it)
+                adapter.setSelected(selectPosition)
+                binding.recyclerSchedule.scrollToPosition(selectPosition)
+            }
+        }
+
+        binding.btnChangeTime.setOnClickListener {
+            val simpleDataFormat = SimpleDateFormat("HH:mm")
+            val date = simpleDataFormat.parse(binding.textTime.text.toString())
+            Calendar.getInstance().time = date
+            TimePickerDialog(
+                requireContext(), { p0, p1, p2 ->
+                    mTime.value = "$p1:$p2"
+                },
+                Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
+                Calendar.getInstance().get(Calendar.MINUTE),
+                true
+            ).show()
+        }
+
+        binding.textBusLine.text = "${getFromToFullString(args.from)} -> ${getFromToFullString(args.to)}"
+
+        val currentTime = getCurrentTime()
         // 버스, 노선, 시간에 알맞은 시간표를 가져와서 adapter에 씀
-        setScheduleData(args.bus, args.from, args.to, getCurrentTime(), Calendar.getInstance().get(Calendar.DAY_OF_WEEK))
+        setScheduleData(args.bus, args.from, args.to, currentTime, Calendar.getInstance().get(Calendar.DAY_OF_WEEK))
 
         return binding.root
     }
 
     private fun setScheduleData(bus: String, from: String, to: String, time: String, dayOfWeek: Int) {
-        var busSchedule = getBusSchedule(bus, from, to, isWeekDay(dayOfWeek))
+        busSchedule = getBusSchedule(bus, from, to, isWeekDay(dayOfWeek))
 
         // 28-1번은 일요일, 공휴일에는 운행하지 않음
         // 공휴일 정보를 가져오려면 처리가 필요한데... 일단은 텍스트로 표출해놓자..
@@ -47,14 +87,40 @@ class ScheduleFragment : Fragment() {
             busSchedule = emptyArray()
         }
 
+        mTime.value = time
+
         schedule.value = busSchedule.toList()
+    }
+
+    private fun setArriveTime(timeGap: Int) {
+        if (timeGap == LAST_BUS_IS_OVER) {
+            binding.textArrive.text = ""
+            binding.textArrive.visibility = View.GONE
+            binding.textArriveTail.text = "운행이 종료되었습니다"
+        } else {
+            binding.textArrive.text = abs(timeGap).toString() + "분"
+            binding.textArrive.visibility = View.VISIBLE
+            binding.textArriveTail.text = " 후 도착합니다"
+        }
+    }
+
+    private fun calcArriveTime(busSchedule: Array<String>, currentTime: String): Int {
+
+        busSchedule.forEach {
+            val timeGap = TimeUtil.calcTimeGap(currentTime, it)
+            if (timeGap < 0) {
+                return timeGap
+            }
+        }
+
+        return LAST_BUS_IS_OVER
     }
 
     private fun getCurrentTime(): String {
         val calendar = Calendar.getInstance()
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val min = calendar.get(Calendar.MINUTE)
-        return "$hour:$min"
+        return String.format("%d:%02d", hour, min)
     }
 
     private fun isWeekDay(dayOfWeek: Int): Boolean {

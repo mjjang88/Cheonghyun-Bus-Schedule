@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CheonghyunBusSchedule</string>
+    <string name="app_name">청현마을 버스시간표</string>
 
     <string name="app_title">청현마을 버스 시간표</string>
 
@@ -24,4 +24,8 @@
     <string name="bus_28_3">28-3번</string>
     <string name="ch_to_se">청현마을 -> 서천고교</string>
     <string name="se_to_ch">서천고교 -> 청현마을</string>
+
+    <string name="time_tail">기준</string>
+    <string name="time_arrive_tail">후 도착합니다</string>
+    <string name="change_time">시간변경</string>
 </resources>

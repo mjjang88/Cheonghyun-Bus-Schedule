@@ -14,16 +14,22 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/text_time"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@{time}"
             android:textSize="@dimen/text_size_big_title"
             android:textStyle="bold"
+            android:background="@color/list_item_schedule_background_selector"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="@dimen/margin_half"
-            android:layout_marginBottom="@dimen/margin_half" />
+            android:layout_marginBottom="@dimen/margin_half"
+            android:paddingLeft="@dimen/margin_half"
+            android:paddingRight="@dimen/margin_half"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
