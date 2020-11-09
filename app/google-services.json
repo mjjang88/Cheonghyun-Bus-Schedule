@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "554337820838",
+    "firebase_url": "https://cheonghyen-bus-schedule.firebaseio.com",
+    "project_id": "cheonghyen-bus-schedule",
+    "storage_bucket": "cheonghyen-bus-schedule.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554337820838:android:d18b2dfe8e6f8a99c85467",
+        "android_client_info": {
+          "package_name": "com.mjjang.cheonghyunbusschedule"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "554337820838-agnf1m6kadbtrub8ot7d2a8vpr2mj43e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAd9X-3eI0umI3OR1ufCTITxk2LtMT-DkU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "554337820838-agnf1m6kadbtrub8ot7d2a8vpr2mj43e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
