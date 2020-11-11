@@ -28,13 +28,10 @@
             android:id="@+id/text_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="?attr/colorAccent"
             app:layout_constraintTop_toBottomOf="@id/text_bus_line"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="@dimen/margin_double"
             android:layout_marginLeft="@dimen/margin_normal"
-            android:paddingLeft="@dimen/margin_half"
-            android:paddingRight="@dimen/margin_half"
             style="@style/TextBigTitle"/>
 
         <TextView
@@ -42,69 +39,97 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/time_tail"
-            app:layout_constraintTop_toTopOf="@id/text_time"
+            app:layout_constraintBottom_toBottomOf="@id/text_time"
             app:layout_constraintLeft_toRightOf="@+id/text_time"
             android:layout_marginLeft="@dimen/margin_half"
-            style="@style/TextBigTitle"/>
+            style="@style/TextTitle"/>
 
-        <Button
-            android:id="@+id/btn_change_time"
+        <LinearLayout
+            android:id="@+id/layout_arrive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/change_time"
-            android:textColor="?attr/colorOnSurface"
-            app:layout_constraintTop_toTopOf="@id/text_time"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginRight="@dimen/margin_normal"/>
-
-        <TextView
-            android:id="@+id/text_arrive"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorAccent"
+            android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/text_time"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="@dimen/margin_normal"
-            android:layout_marginLeft="@dimen/margin_normal"
-            android:paddingLeft="@dimen/margin_half"
-            android:paddingRight="@dimen/margin_half"
-            style="@style/TextBigTitle"/>
+            android:layout_marginLeft="@dimen/margin_normal">
 
-        <TextView
-            android:id="@+id/text_arrive_tail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/time_arrive_tail"
-            app:layout_constraintTop_toBottomOf="@id/text_time"
-            app:layout_constraintLeft_toRightOf="@id/text_arrive"
-            android:layout_marginTop="@dimen/margin_normal"
-            android:layout_marginLeft="@dimen/margin_normal"
-            style="@style/TextBigTitle"/>
+            <TextView
+                android:id="@+id/text_arrive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:paddingLeft="@dimen/margin_half"
+                android:paddingRight="@dimen/margin_half"
+                android:layout_marginRight="@dimen/margin_half"
+                style="@style/TextBigTitle"/>
+
+            <TextView
+                android:id="@+id/text_arrive_tail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@string/time_arrive_tail"
+                style="@style/TextTitle"/>
+
+        </LinearLayout>
 
         <View
             style="@style/Divider"
-            app:layout_constraintTop_toBottomOf="@id/text_arrive_tail"
+            app:layout_constraintTop_toBottomOf="@id/layout_arrive"
             android:layout_marginTop="@dimen/margin_normal"
             android:layout_marginLeft="@dimen/margin_normal"
             android:layout_marginRight="@dimen/margin_normal"/>
 
-        <TextView
-            android:id="@+id/text_schedule"
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/toggle_week"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/schedule"
-            app:layout_constraintTop_toBottomOf="@id/text_arrive_tail"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:singleSelection="true"
+            app:selectionRequired="true"
+            app:layout_constraintTop_toBottomOf="@id/layout_arrive"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="@dimen/margin_double"
-            style="@style/TextBigTitle"/>
+            android:layout_marginRight="@dimen/margin_normal">
+
+            <Button
+                android:id="@+id/btn_weekday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/weekday"
+                android:textSize="@dimen/text_size_bigger"
+                android:textColor="?attr/colorOnSurface"
+                style="?attr/materialButtonOutlinedStyle"/>
+
+            <Button
+                android:id="@+id/btn_weekend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/weekend"
+                android:textSize="@dimen/text_size_bigger"
+                android:textColor="?attr/colorOnSurface"
+                style="?attr/materialButtonOutlinedStyle"/>
+
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <TextView
+            android:id="@+id/text_alert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorRed"
+            app:layout_constraintTop_toBottomOf="@id/toggle_week"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="@dimen/margin_quarter"
+            android:layout_marginRight="@dimen/margin_normal"
+            android:visibility="gone"
+            style="@style/TextSub"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_schedule"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/text_schedule"
+            app:layout_constraintTop_toBottomOf="@id/text_alert"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="@dimen/margin_normal"
             android:layout_marginLeft="@dimen/margin_normal"

@@ -22,14 +22,25 @@
                 android:layout_marginLeft="@dimen/margin_normal"
                 style="@style/TextBigTitle"/>
 
+            <ImageButton
+                android:id="@+id/btn_share"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_baseline_share_24"
+                android:background="@null"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="@dimen/margin_half"
+                android:layout_marginRight="@dimen/margin_half"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/update_date"
                 android:textSize="@dimen/text_size_small"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/layout_bus_18"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginBottom="@dimen/margin_quarter"
                 android:layout_marginRight="@dimen/margin_normal"/>
 
             <LinearLayout

@@ -28,4 +28,7 @@
     <string name="time_tail">기준</string>
     <string name="time_arrive_tail">후 도착합니다</string>
     <string name="change_time">시간변경</string>
+
+    <string name="weekday">주중</string>
+    <string name="weekend">주말</string>
 </resources>

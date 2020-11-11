@@ -1,5 +1,6 @@
 package com.mjjang.cheonghyunbusschedule.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -71,6 +72,17 @@ class HomeFragment : Fragment() {
 
         binding.btnBus283HeToCh.setOnClickListener {
             navigateToSchedule(it, "28-3", "he", "ch")
+        }
+
+        binding.btnShare.setOnClickListener {
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.mjjang.cheonghyunbusschedule")
+                type = "text/plain"
+            }
+
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
         }
 
         return binding.root

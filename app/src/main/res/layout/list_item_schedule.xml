@@ -19,8 +19,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@{time}"
-            android:textSize="@dimen/text_size_big_title"
-            android:textStyle="bold"
             android:background="@color/list_item_schedule_background_selector"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -29,7 +27,8 @@
             android:layout_marginTop="@dimen/margin_half"
             android:layout_marginBottom="@dimen/margin_half"
             android:paddingLeft="@dimen/margin_half"
-            android:paddingRight="@dimen/margin_half"/>
+            android:paddingRight="@dimen/margin_half"
+            style="@style/TextBigTitle"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

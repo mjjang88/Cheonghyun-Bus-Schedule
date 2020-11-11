@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.navArgs
+import com.mjjang.cheonghyunbusschedule.R
 import com.mjjang.cheonghyunbusschedule.adapter.ScheduleAdapter
 import com.mjjang.cheonghyunbusschedule.data.BusSchedule
 import com.mjjang.cheonghyunbusschedule.databinding.FragmentScheduleBinding
@@ -39,8 +40,11 @@ class ScheduleFragment : Fragment() {
 
         val adapter = ScheduleAdapter()
         binding.recyclerSchedule.adapter = adapter
+        binding.recyclerSchedule.itemAnimator = null
         schedule.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+            adapter.submitList(it) {
+                mTime.value = getCurrentTime()
+            }
         }
 
         mTime.observe(viewLifecycleOwner) {
@@ -55,32 +59,39 @@ class ScheduleFragment : Fragment() {
             }
         }
 
-        binding.btnChangeTime.setOnClickListener {
-            val simpleDataFormat = SimpleDateFormat("HH:mm")
-            val date = simpleDataFormat.parse(binding.textTime.text.toString())
-            Calendar.getInstance().time = date
-            TimePickerDialog(
-                requireContext(),
-                android.R.style.Theme_Holo_Light_Dialog,
-                { p0, p1, p2 ->
-                    mTime.value = "$p1:$p2"
-                },
-                Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
-                Calendar.getInstance().get(Calendar.MINUTE),
-                false
-            ).show()
-        }
-
         binding.textBusLine.text = "${getFromToFullString(args.from)} -> ${getFromToFullString(args.to)}"
 
-        val currentTime = getCurrentTime()
         // 버스, 노선, 시간에 알맞은 시간표를 가져와서 adapter에 씀
-        setScheduleData(args.bus, args.from, args.to, currentTime, Calendar.getInstance().get(Calendar.DAY_OF_WEEK))
+        binding.toggleWeek.addOnButtonCheckedListener { group, checkedId, isChecked ->
+            if (!isChecked) return@addOnButtonCheckedListener
+            when (checkedId) {
+                R.id.btn_weekday -> {
+                    setScheduleData(args.bus, args.from, args.to, Calendar.MONDAY)
+                    binding.textAlert.visibility = View.GONE
+                }
+                R.id.btn_weekend -> {
+                    setScheduleData(args.bus, args.from, args.to, Calendar.SATURDAY)
+                    binding.textAlert.visibility = View.VISIBLE
+                }
+            }
+        }
+
+        if (isWeekDay(Calendar.getInstance().get(Calendar.DAY_OF_WEEK))) {
+            binding.toggleWeek.check(R.id.btn_weekday)
+        } else {
+            binding.toggleWeek.check(R.id.btn_weekend)
+        }
+
+        if (args.bus == "28-1") {
+            binding.textAlert.text = "일요일/공휴일은 운행하지 않습니다"
+        } else {
+            binding.textAlert.text = "공휴일은 주말시간표로 운행합니다"
+        }
 
         return binding.root
     }
 
-    private fun setScheduleData(bus: String, from: String, to: String, time: String, dayOfWeek: Int) {
+    private fun setScheduleData(bus: String, from: String, to: String, dayOfWeek: Int) {
         busSchedule = getBusSchedule(bus, from, to, isWeekDay(dayOfWeek))
 
         // 28-1번은 일요일, 공휴일에는 운행하지 않음
@@ -88,8 +99,6 @@ class ScheduleFragment : Fragment() {
         if (bus == "28-1" && dayOfWeek == Calendar.SUNDAY) {
             busSchedule = emptyArray()
         }
-
-        mTime.value = time
 
         schedule.value = busSchedule.toList()
     }
