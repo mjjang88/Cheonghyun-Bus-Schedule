@@ -4,50 +4,29 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.mjjang.cheonghyunbusschedule.R
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.jsoup.Jsoup
-import java.util.regex.Pattern
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.ktx.get
+import com.google.firebase.remoteconfig.ktx.remoteConfig
 
 object VersionManager {
 
-    fun doVersionCheck(context : Context) {
+    fun doVersionCheck(context: Context) {
+        val remoteConfig = Firebase.remoteConfig
+        remoteConfig.fetchAndActivate()
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    try {
+                        val marketVersion = remoteConfig["app_version"].asString()
+                        val deviceVersion = context.packageManager.getPackageInfo(context.packageName, 0).versionName
 
-        GlobalScope.launch(Dispatchers.Main) {
-            val marketVersion = withContext(Dispatchers.Default) {
-                getMarketVersion(context)
+                        if (marketVersion > deviceVersion) {
+                            showUpdateDialog(context)
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
             }
-
-            val deviceVerison = context.packageManager.getPackageInfo(context.packageName, 0).versionName
-            if (removeLastVersionCode(marketVersion) > removeLastVersionCode(deviceVerison)) {
-                showUpdateDialog(context)
-            }
-
-            marketVersion.lastIndexOf(".")
-        }
-    }
-
-    fun removeLastVersionCode(version : String) : String {
-        val nLastIndex = version.lastIndexOf(".")
-        return version.substring(0, nLastIndex)
-    }
-
-    private fun getMarketVersion(context: Context) : String {
-        val doc = Jsoup
-            .connect("https://play.google.com/store/apps/details?id=" + context.packageName)
-            .get()
-        val version = doc.select(".htlgb")
-
-        for (v in version) {
-            if (Pattern.matches("^[0-9]{1}.[0-9]{1}.[0-9]{1}$", v.text())) {
-                return v.text()
-            }
-        }
-
-        return ""
     }
 
     private fun showUpdateDialog(context: Context) {
